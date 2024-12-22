@@ -31,6 +31,7 @@
                                 <th>Order ID</th>
                                 <th>Amount</th>
                                 <th>Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,19 @@
                                     <td>{{ $order->id }}</td>
                                     <td>${{ number_format($order->amount, 2) }}</td>
                                     <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                                    <td>
+                                        <a href="{{ route('customers.orders.show', ['customer' => $customer->id, 'order' => $order->id]) }}" 
+                                           class="btn btn-info btn-sm">View</a>
+                                        <a href="{{ route('customers.orders.edit', ['customer' => $customer->id, 'order' => $order->id]) }}" 
+                                           class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('customers.orders.destroy', ['customer' => $customer->id, 'order' => $order->id]) }}" 
+                                              method="POST" class="d-inline" 
+                                              onsubmit="return confirm('Are you sure you want to delete this order?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
