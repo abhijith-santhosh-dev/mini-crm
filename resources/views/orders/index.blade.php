@@ -18,6 +18,10 @@
             <div class="alert alert-warning text-center">
                 <strong>No orders found for this customer.</strong>
             </div>
+            <!-- Button to create a new order -->
+            <div class="text-center">
+                <a href="{{ route('customers.orders.create', $customer->id) }}" class="btn btn-success btn-lg">Create New Order</a>
+            </div>
         @else
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
